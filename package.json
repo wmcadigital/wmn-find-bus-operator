@@ -1,12 +1,12 @@
 {
-  "name": "wmn-create-react-app-template",
+  "name": "wmn-find-bus-operator",
   "version": "0.1.0",
   "private": true,
   "author": "WMCA",
   "main": "src/index.js",
-  "repository": "https://github.com/wmcadigital/wmn-create-react-app-template",
+  "repository": "https://github.com/wmcadigital/wmn-find-bus-operator",
   "bugs": {
-    "url": "https://github.com/wmcadigital/wmn-create-react-app-template/issues"
+    "url": "https://github.com/wmcadigital/wmn-find-bus-operator/issues"
   },
   "copyright": "WMCA",
   "scripts": {
