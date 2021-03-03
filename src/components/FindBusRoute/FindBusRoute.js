@@ -1,4 +1,5 @@
 import React from 'react';
+import AutoComplete from '../AutoComplete/AutoComplete';
 
 const FindBusRoute = () => {
   return (
@@ -13,6 +14,7 @@ const FindBusRoute = () => {
                 run bus services, not West Midlands Network.
               </p>
               <h2 className="h3">Search for a bus route</h2>
+              <AutoComplete />
             </div>
           </div>
           <div className="wmnds-col-md-1-3">

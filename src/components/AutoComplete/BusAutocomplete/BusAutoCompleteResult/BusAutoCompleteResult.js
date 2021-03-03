@@ -1,27 +1,21 @@
 import React, { useContext } from 'react';
 import { AutoCompleteContext } from 'globalState';
 // Import components
-import DisruptionIndicatorMedium from '../../../DisruptionIndicator/DisruptionIndicatorMedium';
+import DisruptionIndicatorMedium from 'components/shared/DisruptionIndicator/DisruptionIndicatorMedium';
 // Import styles
 import s from './BusAutoCompleteResult.module.scss';
 
 const BusAutoCompleteResult = (props) => {
   const { result, handleKeyDown } = props || {};
 
-  const [autoCompleteState, autoCompleteDispatch] = useContext(AutoCompleteContext);
+  const [, autoCompleteDispatch] = useContext(AutoCompleteContext);
 
   const updateSelectedService = () => {
-    // Reset selected disruption ID from map (if any)
-    if (autoCompleteState.selectedItem.selectedByMap) {
-      autoCompleteDispatch({ type: 'RESET_SELECTED_SERVICES' });
-    }
-
     autoCompleteDispatch({
       type: 'UPDATE_SELECTED_ITEM',
       payload: {
         id: result.id,
         operator: result.routes[0].operatorCode,
-        severity: result.disruptionSeverity,
         serviceNumber: result.serviceNumber,
         routeName: result.routes[0].routeName,
       },
