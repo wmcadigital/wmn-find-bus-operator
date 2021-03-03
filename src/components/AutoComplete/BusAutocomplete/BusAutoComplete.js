@@ -18,8 +18,7 @@ const BusAutoComplete = () => {
   const debounceInput = useRef(null);
 
   const { loading, errorInfo, results, getAutoCompleteResults } = useAutoCompleteAPI(
-    `/bus/v1/service?q=${encodeURI(autoCompleteState.query)}`,
-    'bus',
+    `/v1/bus?q=${encodeURI(autoCompleteState.query)}`,
     autoCompleteState.query
   );
 
@@ -36,7 +35,6 @@ const BusAutoComplete = () => {
         <SelectedServiceHeader
           autoCompleteState={autoCompleteState}
           autoCompleteDispatch={() => autoCompleteDispatch({ type: 'RESET_SELECTED_SERVICES' })}
-          mode="bus"
         />
       ) : (
         <>

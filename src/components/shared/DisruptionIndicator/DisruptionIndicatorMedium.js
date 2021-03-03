@@ -2,51 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 
-const DisruptionIndicatorMedium = ({
-  className,
-  iconLeft,
-  narrow,
-  noMarginOnIcon,
-  severity,
-  text,
-  title,
-}) => {
-  let iconRightName;
-  let disruptedClass;
-  // Removed the if statement - Icon now showing.
-  // Do a switch on the disruption severity, then map the type and iconRightName to the correct vars
-  switch (severity) {
-    case 'normal':
-      iconRightName = 'warning-circle';
-      disruptedClass = 'warning';
-      break;
-    // Major disruption (high)
-    case 'high':
-      iconRightName = 'warning-triangle';
-      disruptedClass = 'error';
-      break;
-    // Severe disruption (veryHigh)
-    case 'veryHigh':
-      iconRightName = 'warning-triangle';
-      disruptedClass = 'severe';
-      break;
-
-    case 'purple':
-      iconRightName = '';
-      disruptedClass = 'purple';
-      break;
-    // Minor disruption (normal)
-    default:
-      iconRightName = 'success';
-      disruptedClass = 'success';
-      break;
-  }
-
+const DisruptionIndicatorMedium = ({ className, iconLeft, narrow, text, title }) => {
   return (
     <div
       className={`
-        wmnds-disruption-indicator-medium
-        ${disruptedClass ? `wmnds-disruption-indicator-medium--${disruptedClass}` : ''}
+        wmnds-disruption-indicator-medium wmnds-disruption-indicator-medium--purple
         ${className} ${narrow ? 'wmnds-disruption-indicator-medium--narrow' : ''}
         wmnds-disruption-indicator-medium--with-icon`}
       title={title}
@@ -59,13 +19,6 @@ const DisruptionIndicatorMedium = ({
         />
       )}
       {text}
-      <Icon
-        iconName={`general-${iconRightName}`}
-        className={`wmnds-disruption-indicator-medium__icon ${
-          noMarginOnIcon ? '' : 'wmnds-disruption-indicator-medium__icon--right'
-        }
-          ${!iconLeft && narrow ? 'wmnds-m-l-xl' : ''}`}
-      />
     </div>
   );
 };
@@ -75,8 +28,6 @@ DisruptionIndicatorMedium.propTypes = {
   className: PropTypes.string,
   iconLeft: PropTypes.string,
   narrow: PropTypes.bool,
-  noMarginOnIcon: PropTypes.bool,
-  severity: PropTypes.string,
   text: PropTypes.string,
   title: PropTypes.string,
 };
@@ -85,8 +36,6 @@ DisruptionIndicatorMedium.defaultProps = {
   className: '',
   iconLeft: null,
   narrow: false,
-  noMarginOnIcon: false,
-  severity: '',
   text: null,
   title: null,
 };

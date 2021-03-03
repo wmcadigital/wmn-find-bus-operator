@@ -13,7 +13,6 @@ const FindBusRoute = () => {
                 Search for a bus route to find out who is running your service. Private companies
                 run bus services, not West Midlands Network.
               </p>
-              <h2 className="h3">Search for a bus route</h2>
               <AutoComplete />
             </div>
           </div>
