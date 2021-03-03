@@ -41,7 +41,7 @@ const BusAutoComplete = () => {
       ) : (
         <>
           <div className={`wmnds-autocomplete wmnds-grid ${loading ? 'wmnds-is--loading' : ''}`}>
-            <Icon iconName="general-search" iconClass="wmnds-autocomplete__icon" />
+            <Icon iconName="general-search" className="wmnds-autocomplete__icon" />
             <div className="wmnds-loader" role="alert" aria-live="assertive">
               <p className="wmnds-loader__content">Content is loading...</p>
             </div>

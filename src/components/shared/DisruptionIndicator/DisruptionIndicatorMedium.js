@@ -55,13 +55,13 @@ const DisruptionIndicatorMedium = ({
       {iconLeft && (
         <Icon
           iconName={iconLeft}
-          iconClass="wmnds-disruption-indicator-medium__icon wmnds-disruption-indicator-medium__icon--left"
+          className="wmnds-disruption-indicator-medium__icon wmnds-disruption-indicator-medium__icon--left"
         />
       )}
       {text}
       <Icon
         iconName={`general-${iconRightName}`}
-        iconClass={`wmnds-disruption-indicator-medium__icon ${
+        className={`wmnds-disruption-indicator-medium__icon ${
           noMarginOnIcon ? '' : 'wmnds-disruption-indicator-medium__icon--right'
         }
           ${!iconLeft && narrow ? 'wmnds-m-l-xl' : ''}`}

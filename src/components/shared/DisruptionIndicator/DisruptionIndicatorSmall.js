@@ -36,10 +36,10 @@ const DisruptionIndicatorSmall = ({ className, iconLeft, severity }) => {
         disruptedClass ? `wmnds-disruption-indicator-small--${disruptedClass}` : ''
       } ${className}`}
     >
-      <Icon iconName={iconLeft} iconClass="wmnds-disruption-indicator-small__icon" />
+      <Icon iconName={iconLeft} className="wmnds-disruption-indicator-small__icon" />
       <Icon
         iconName={`general-${iconRightName}`}
-        iconClass="wmnds-disruption-indicator-small__icon"
+        className="wmnds-disruption-indicator-small__icon"
       />
     </span>
   );

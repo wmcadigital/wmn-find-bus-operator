@@ -11,7 +11,7 @@ const CloseButton = ({ onClick, isFloated }) => {
       className={`${s.closeButton} ${isFloated ? s.closeButtonFloated : ''}`}
       onClick={onClick}
     >
-      <Icon iconName="general-cross" iconClass={`general-cross ${s.closeIcon}`} />
+      <Icon iconName="general-cross" className={`general-cross ${s.closeIcon}`} />
     </button>
   );
 };
