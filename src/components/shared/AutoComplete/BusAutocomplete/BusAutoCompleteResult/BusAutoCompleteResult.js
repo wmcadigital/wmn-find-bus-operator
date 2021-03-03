@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AutoCompleteContext } from 'globalState';
 // Import components
-import DisruptionIndicatorMedium from 'components/shared/DisruptionIndicator/DisruptionIndicatorMedium';
+import DisruptionIndicatorMedium from '../../../DisruptionIndicator/DisruptionIndicatorMedium';
 // Import styles
 import s from './BusAutoCompleteResult.module.scss';
 
@@ -17,7 +17,7 @@ const BusAutoCompleteResult = (props) => {
     }
 
     autoCompleteDispatch({
-      type: 'UDPATE_SELECTED_ITEM',
+      type: 'UPDATE_SELECTED_ITEM',
       payload: {
         id: result.id,
         operator: result.routes[0].operatorCode,

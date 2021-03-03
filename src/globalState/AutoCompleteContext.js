@@ -17,22 +17,10 @@ export const AutoCompleteProvider = (props) => {
     // // The selected service is used to store details when a user has clicked an autocomplete
     selectedItem: {
       id: getSearchParam('selectedItem') || null,
-      selectedByMap: getSearchParam('selectedByMap') || null,
       operator: null,
-      severity: null,
       serviceNumber: null,
       routeName: null,
       stopName: null,
-      lines: [],
-      to: null,
-    },
-    selectedItemTo: {
-      id: getSearchParam('selectedItemTo') || null,
-      operator: null,
-      severity: null,
-      serviceNumber: null,
-      stopName: null,
-      routeName: null,
       lines: [],
       to: null,
     },
@@ -43,7 +31,7 @@ export const AutoCompleteProvider = (props) => {
     // Update the query to what the user has typed
     switch (action.type) {
       case 'UPDATE_QUERY': {
-        const query = action.to ? 'queryTo' : 'query'; // If 'to' exists then make sure we set the correct field
+        const query = 'query'; // If 'to' exists then make sure we set the correct field
         setSearchParam(query, action.query);
 
         return {
@@ -52,15 +40,8 @@ export const AutoCompleteProvider = (props) => {
         };
       }
       // Update the state to show item user has selected
-      case 'UDPATE_SELECTED_ITEM': {
-        // If object contains selectedByMap
-        if (action.payload.selectedByMap) {
-          setSearchParam('selectedByMap', action.payload.selectedByMap); // Update URL
-        } else {
-          delSearchParam('selectedByMap'); // Delete URL
-        }
-
-        const item = action.payload.to ? 'selectedItemTo' : 'selectedItem'; // If 'to' exists in payload then make sure we set the correct field
+      case 'UPDATE_SELECTED_ITEM': {
+        const item = 'selectedItem'; // If 'to' exists in payload then make sure we set the correct field
         setSearchParam(item, action.payload.id); // Set URL
 
         return {
@@ -69,14 +50,7 @@ export const AutoCompleteProvider = (props) => {
         };
       }
       // Update the state to show item user has selected
-      case 'UDPATE_SELECTED_ITEM_LINES': {
-        // If object contains selectedByMap
-        if (action.payload.selectedByMap) {
-          setSearchParam('selectedByMap', action.payload.selectedByMap); // Update URL
-        } else {
-          delSearchParam('selectedByMap'); // Delete URL
-        }
-
+      case 'UPDATE_SELECTED_ITEM_LINES': {
         return {
           ...state,
           selectedItem: {
@@ -89,8 +63,8 @@ export const AutoCompleteProvider = (props) => {
       // Used to cancel selected service/station etc. This is mainly used when using from/to stations
       case 'RESET_SELECTED_ITEM': {
         // If action.payload ('to') exists in payload then make sure we set the correct field
-        const item = action.payload.to ? 'selectedItemTo' : 'selectedItem';
-        const query = action.payload.to ? 'queryTo' : 'query';
+        const item = 'selectedItem';
+        const query = 'query';
         // Delete correct things from URL
         delSearchParam(item);
         delSearchParam(query);
@@ -119,15 +93,10 @@ export const AutoCompleteProvider = (props) => {
       // Used to reset everything
       case 'RESET_SELECTED_SERVICES':
         delSearchParam('selectedItem');
-        delSearchParam('selectedItemTo');
-        delSearchParam('selectedByMap');
         delSearchParam('query');
-        delSearchParam('queryTo');
         return {
           query: '',
-          queryTo: '',
           selectedItem: {},
-          selectedItemTo: {},
         };
       // Default should return intial state if error
       default:
