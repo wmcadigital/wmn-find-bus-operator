@@ -15,9 +15,9 @@ const FindBusRoute = () => {
   return (
     <div className="wmnds-container wmnds-p-t-lg wmnds-p-b-lg wmnds-grid">
       <div className="wmnds-col-1">
-        {!selectedItem.id && <h1>Find a bus company</h1>}
+        {!selectedItem.operator && <h1>Find a bus company</h1>}
         <div className="wmnds-grid wmnds-grid--spacing-md-2-lg">
-          {selectedItem.id ? (
+          {selectedItem.operator ? (
             <div className="wmnds-col-md-2-3">
               <Button
                 btnClass="wmnds-btn--link wmnds-m-none"

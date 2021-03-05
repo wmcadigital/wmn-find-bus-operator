@@ -31,7 +31,7 @@ const BusAutoComplete = () => {
 
   return (
     <>
-      {autoCompleteState.selectedItem.id && !autoCompleteState.selectedItem.selectedByMap ? (
+      {autoCompleteState.selectedItem.operator ? (
         <SelectedServiceHeader
           autoCompleteState={autoCompleteState}
           autoCompleteDispatch={() => autoCompleteDispatch({ type: 'RESET_SELECTED_SERVICES' })}

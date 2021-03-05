@@ -7,11 +7,6 @@ import s from './BusAutoCompleteResult.module.scss';
 
 const BusAutoCompleteResult = (props) => {
   const { result, handleKeyDown } = props || {};
-  console.log(
-    '🚀 ~ file: BusAutoCompleteResult.js ~ line 10 ~ BusAutoCompleteResult ~ result',
-    result
-  );
-
   const [, autoCompleteDispatch] = useContext(AutoCompleteContext);
 
   const updateSelectedService = () => {
