@@ -42,10 +42,20 @@ const FindBusRoute = () => {
                   <AutoComplete />
                 </div>
                 <div className="wmnds-grid">
-                  <Button
-                    btnClass={`${s.helpLink} wmnds-btn--link wmnds-col-3-4`}
-                    text="If you don’t know what bus route you need, plan your journey."
-                  />
+                  <div className="wmnds-col-md-3-4">
+                    <details className="wmnds-details">
+                      <summary className="wmnds-link">
+                        If you don’t know what bus route you need, plan your journey.
+                      </summary>
+                      <div className="wmnds-details__content">
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium unde
+                          nam consequuntur a id odio? Minus dolorum nobis unde officia asperiores
+                          quam harum? Eos odit dolores maxime rem exercitationem nostrum.
+                        </p>
+                      </div>
+                    </details>
+                  </div>
                 </div>
               </div>
             </div>
