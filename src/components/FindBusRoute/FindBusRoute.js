@@ -39,7 +39,7 @@ const FindBusRoute = () => {
                   run bus services, not West Midlands Network.
                 </p>
                 <div className="wmnds-m-b-md">
-                  <AutoComplete />
+                  <AutoComplete resetSearch={resetSearch} />
                 </div>
                 <div className="wmnds-grid">
                   <div className="wmnds-col-md-3-4">
