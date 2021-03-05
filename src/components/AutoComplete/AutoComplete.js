@@ -26,10 +26,10 @@ const AutoComplete = () => {
     <div>
       {autoCompleteTitle('Search for a bus route', 'Enter bus route number, for example 45, X1.')}
       <div className="wmnds-grid wmnds-grid--spacing-2-md">
-        <div className="wmnds-col-3-4">
+        <div className="wmnds-col-xs-1-1 wmnds-col-md-3-4">
           <BusAutoComplete />
         </div>
-        <div className="wmnds-col-1-4">
+        <div className="wmnds-col-xs-1-1 wmnds-col-md-1-4">
           {autoCompleteState.query !== '' && (
             <Button
               btnClass="wmnds-btn--primary wmnds-btn--block"

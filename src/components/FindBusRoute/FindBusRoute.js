@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AutoCompleteContext } from 'globalState';
 import AutoComplete from '../AutoComplete/AutoComplete';
 import Button from '../shared/Button/Button';
+import s from './FindBusRoute.module.scss';
 
 const FindBusRoute = () => {
   const [autoCompleteState] = useContext(AutoCompleteContext);
@@ -22,7 +23,7 @@ const FindBusRoute = () => {
             </div>
           ) : (
             <div className="wmnds-col-md-2-3">
-              <div className="wmnds-p-lg bg-white">
+              <div className={`${s.mainCard} bg-white`}>
                 <p>
                   Search for a bus route to find out who is running your service. Private companies
                   run bus services, not West Midlands Network.
@@ -30,15 +31,17 @@ const FindBusRoute = () => {
                 <div className="wmnds-m-b-md">
                   <AutoComplete />
                 </div>
-                <Button
-                  btnClass="wmnds-btn--link"
-                  text="If you don’t know what bus route you need, plan your journey."
-                />
+                <div className="wmnds-grid">
+                  <Button
+                    btnClass={`${s.helpLink} wmnds-btn--link wmnds-col-3-4`}
+                    text="If you don’t know what bus route you need, plan your journey."
+                  />
+                </div>
               </div>
             </div>
           )}
-          <div className="wmnds-col-md-1-3">
-            <div className="wmnds-p-md bg-white">
+          <div className="wmnds-col-1 wmnds-col-md-1-3">
+            <div className="wmnds-p-md bg-white wmnds-hide-mobile">
               <div className="wmnds-grid wmnds-grid--justify-between">
                 <strong className="wmnds-col-auto">Mode of travel</strong>
                 <Button btnClass="wmnds-btn--link wmnds-col-auto" text="Change" />

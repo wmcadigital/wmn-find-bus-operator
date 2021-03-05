@@ -37,6 +37,7 @@ const BusAutoCompleteResult = (props) => {
       aria-pressed="false"
       onKeyDown={(e) => handleKeyDown(e)}
       onClick={() => updateSelectedService()}
+      style={{ flexWrap: 'nowrap' }}
     >
       <div>
         <DisruptionIndicatorMedium
