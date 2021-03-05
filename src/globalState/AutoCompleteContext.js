@@ -69,19 +69,6 @@ export const AutoCompleteProvider = (props) => {
         delSearchParam(item);
         delSearchParam(query);
 
-        // Reset the selectedItem.lines if selectedItemTo is reset for trams
-        if (action.payload.mode === 'tram' && action.payload.to) {
-          return {
-            ...state,
-            [query]: '',
-            [item]: {},
-            selectedItem: {
-              ...state.selectedItem,
-              lines: [],
-            },
-          };
-        }
-
         // Update state with deleted/cancelled service/item
         return {
           ...state,
