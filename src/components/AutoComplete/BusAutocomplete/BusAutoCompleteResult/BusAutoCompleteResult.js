@@ -24,7 +24,7 @@ const BusAutoCompleteResult = (props) => {
   // Return service with the above disruption logic, replace type and iconName with correc icon and class depending on disruption type
   return (
     <li
-      className="wmnds-autocomplete-suggestions__li wmnds-grid"
+      className={`${s.nowrap} wmnds-autocomplete-suggestions__li wmnds-grid`}
       title={result.serviceNumber}
       tabIndex="0"
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
@@ -32,7 +32,6 @@ const BusAutoCompleteResult = (props) => {
       aria-pressed="false"
       onKeyDown={(e) => handleKeyDown(e)}
       onClick={() => updateSelectedService()}
-      style={{ flexWrap: 'nowrap' }}
     >
       <div>
         <DisruptionIndicatorMedium
