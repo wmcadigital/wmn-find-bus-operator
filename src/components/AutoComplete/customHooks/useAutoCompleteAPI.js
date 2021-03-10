@@ -32,21 +32,17 @@ const useAutoCompleteAPI = (apiPath, query) => {
       setLoading(false); // Set loading state to false after data is received
       let payload;
       // BUS
-      setResults(response.data.RouteSearchResponse.SearchMatches.RouteSearchMatch || []); // If response.data.services isn't there, then we can't map the results to it, so return null
+      setResults(response.data.services || []); // If response.data.services isn't there, then we can't map the results to it, so return null
 
-      if (
-        selectedService.id &&
-        response.data?.RouteSearchResponse.SearchMatches.RouteSearchMatch.length
-      ) {
-        const result = response.data?.RouteSearchResponse.SearchMatches.RouteSearchMatch.filter(
+      if (selectedService.id && response.data?.services.length) {
+        const result = response.data?.services.filter(
           (service) => service.id === selectedService.id
         )[0];
 
         payload = {
-          id: result.LineId,
-          operator: result.Operators.Operator[0],
-          serviceNumber: result.LineName,
-          routeName: result.routes[0].routeName,
+          id: result.id,
+          operator: result.routes[0],
+          serviceNumber: result.serviceNumber,
         };
       }
 

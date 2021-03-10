@@ -24,10 +24,10 @@ const FindBusRoute = () => {
                 text="&lt; Back"
                 onClick={resetSearch}
               />
-              <h1>Your bus company is {selectedItem.operator.Name}</h1>
+              <h1>Your bus company is {selectedItem.operator.operatorName}</h1>
               <p>
-                If you are only travelling on {selectedItem.operator.Name} buses, you can buy
-                tickets which only work with these buses.
+                If you are only travelling on {selectedItem.operator.operatorName} buses, you can
+                buy tickets which only work with these buses.
               </p>
               <a
                 href="https://www.wmnetwork.co.uk/tickets/#/"
@@ -35,7 +35,7 @@ const FindBusRoute = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Buy a {selectedItem.operator.Name} ticket
+                Buy a {selectedItem.operator.operatorName} ticket
               </a>
             </div>
           ) : (
