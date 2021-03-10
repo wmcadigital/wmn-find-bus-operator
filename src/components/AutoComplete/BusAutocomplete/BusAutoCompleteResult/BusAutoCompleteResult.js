@@ -42,7 +42,7 @@ const BusAutoCompleteResult = (props) => {
       </div>
       {/* Right section */}
       <div className="wmnds-col-auto">
-        <div>Route name</div>
+        {/* <div>Route name</div> Route name can go here when api is ready. */}
         <strong className={`${s.routeName}`}>{result.Operators.Operator[0].Name}</strong>
       </div>
     </li>

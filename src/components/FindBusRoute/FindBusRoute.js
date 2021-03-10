@@ -29,7 +29,14 @@ const FindBusRoute = () => {
                 If you are only travelling on {selectedItem.operator.Name} buses, you can buy
                 tickets which only work with these buses.
               </p>
-              <Button text={`Buy a ${selectedItem.operator.Name} ticket`} />
+              <a
+                href="https://www.wmnetwork.co.uk/tickets/#/"
+                className="wmnds-btn"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Buy a {selectedItem.operator.Name} ticket
+              </a>
             </div>
           ) : (
             <div className="wmnds-col-md-2-3">
@@ -41,22 +48,13 @@ const FindBusRoute = () => {
                 <div className="wmnds-m-b-md">
                   <AutoComplete resetSearch={resetSearch} />
                 </div>
-                <div className="wmnds-grid">
-                  <div className="wmnds-col-md-3-4">
-                    <details className="wmnds-details">
-                      <summary className="wmnds-link">
-                        If you don’t know what bus route you need, plan your journey.
-                      </summary>
-                      <div className="wmnds-details__content">
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium unde
-                          nam consequuntur a id odio? Minus dolorum nobis unde officia asperiores
-                          quam harum? Eos odit dolores maxime rem exercitationem nostrum.
-                        </p>
-                      </div>
-                    </details>
-                  </div>
-                </div>
+                <p className="wmnds-m-none">
+                  If you don’t know what bus route you need,{' '}
+                  <a href="https://journeyplanner.networkwestmidlands.com/" className="wmnds-link">
+                    plan your journey
+                  </a>
+                  .
+                </p>
               </div>
             </div>
           )}
