@@ -73,13 +73,15 @@ const BusAutoComplete = () => {
             // Only show autocomplete results if there is a query
             autoCompleteState.query && (
               <ul className="wmnds-autocomplete-suggestions" ref={resultsList}>
-                {results.map((result) => (
-                  <BusAutoCompleteResult
-                    key={result.id}
-                    result={result}
-                    handleKeyDown={handleKeyDown}
-                  />
-                ))}
+                {results
+                  .sort((a, b) => a.LineName.replace(/\D/g, '') - b.LineName.replace(/\D/g, ''))
+                  .map((result) => (
+                    <BusAutoCompleteResult
+                      key={result.id}
+                      result={result}
+                      handleKeyDown={handleKeyDown}
+                    />
+                  ))}
               </ul>
             )
           )}
