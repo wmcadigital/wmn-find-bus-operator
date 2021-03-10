@@ -62,7 +62,7 @@ const FindBusRoute = () => {
             <div className="wmnds-p-md bg-white wmnds-hide-mobile">
               <div className="wmnds-grid wmnds-grid--justify-between">
                 <strong className="wmnds-col-auto">Mode of travel</strong>
-                <Button btnClass="wmnds-btn--link wmnds-col-auto" text="Change" />
+                {/* <Button btnClass="wmnds-btn--link wmnds-col-auto" text="Change" /> */}
               </div>
               <p className="wmnds-m-none">Bus</p>
             </div>
