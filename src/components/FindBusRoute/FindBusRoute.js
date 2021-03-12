@@ -13,7 +13,7 @@ const FindBusRoute = () => {
   };
   const { selectedItem } = autoCompleteState;
   return (
-    <div className="wmnds-container wmnds-p-t-lg wmnds-p-b-lg wmnds-grid">
+    <div className="wmnds-container wmnds-p-t-lg wmnds-p-b-lg wmnds-m-b-lg wmnds-grid">
       <div className="wmnds-col-1">
         {!selectedItem.operator && <h1>Find a bus company</h1>}
         <div className="wmnds-grid wmnds-grid--spacing-md-2-lg">

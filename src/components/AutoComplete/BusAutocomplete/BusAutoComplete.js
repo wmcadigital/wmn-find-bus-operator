@@ -18,7 +18,7 @@ const BusAutoComplete = () => {
   const debounceInput = useRef(null);
 
   const { loading, errorInfo, results, getAutoCompleteResults } = useAutoCompleteAPI(
-    `/api/lineinfo?q=${encodeURI(autoCompleteState.query)}`,
+    `/api/lineinfo?q=${encodeURI(autoCompleteState.query).replace(/\D+/g, '')}`, // remove letters from query
     autoCompleteState.query
   );
 
