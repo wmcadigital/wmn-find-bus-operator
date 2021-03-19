@@ -18,7 +18,7 @@ const BusAutoComplete = () => {
   const debounceInput = useRef(null);
 
   const { loading, errorInfo, results, getAutoCompleteResults } = useAutoCompleteAPI(
-    `/v1/bus?q=${encodeURI(autoCompleteState.query)}`,
+    `/api/lineinfo?q=${encodeURI(autoCompleteState.query).replace(/\D+/g, '')}`, // remove letters from query
     autoCompleteState.query
   );
 
@@ -74,7 +74,10 @@ const BusAutoComplete = () => {
             autoCompleteState.query && (
               <ul className="wmnds-autocomplete-suggestions" ref={resultsList}>
                 {results
-                  .sort((a, b) => a.LineName.replace(/\D/g, '') - b.LineName.replace(/\D/g, ''))
+                  .sort(
+                    (a, b) =>
+                      a.serviceNumber.replace(/\D/g, '') - b.serviceNumber.replace(/\D/g, '')
+                  )
                   .map((result) => (
                     <BusAutoCompleteResult
                       key={result.id}

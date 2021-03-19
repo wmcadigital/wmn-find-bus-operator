@@ -13,10 +13,9 @@ const BusAutoCompleteResult = (props) => {
     autoCompleteDispatch({
       type: 'UPDATE_SELECTED_ITEM',
       payload: {
-        id: result.LineId,
-        operator: result.Operators.Operator[0],
-        serviceNumber: result.LineName,
-        routeName: result.LineName,
+        id: result.id,
+        operator: result.routes[0],
+        serviceNumber: result.serviceNumber,
       },
     });
   };
@@ -37,13 +36,13 @@ const BusAutoCompleteResult = (props) => {
         <DisruptionIndicatorMedium
           disruptedClass="purple"
           className="wmnds-col-auto"
-          text={result.LineName}
+          text={result.serviceNumber}
         />
       </div>
       {/* Right section */}
       <div className="wmnds-col-auto">
-        {/* <div>Route name</div> Route name can go here when api is ready. */}
-        <strong className={`${s.routeName}`}>{result.Operators.Operator[0].Name}</strong>
+        <div>{result.routes[0].routeName}</div>
+        <strong className={`${s.routeName}`}>{result.routes[0].operatorName}</strong>
       </div>
     </li>
   );
