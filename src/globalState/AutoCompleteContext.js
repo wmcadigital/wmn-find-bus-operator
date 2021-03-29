@@ -15,15 +15,8 @@ export const AutoCompleteProvider = (props) => {
   const initialState = {
     query: getSearchParam('query') || '',
     // // The selected service is used to store details when a user has clicked an autocomplete
-    selectedItem: {
-      id: getSearchParam('selectedItem') || null,
-      operator: null,
-      serviceNumber: null,
-      routeName: null,
-      stopName: null,
-      lines: [],
-      to: null,
-    },
+    showAutocomplete: true,
+    selectedItems: [],
   };
 
   // Set up a reducer so we can change state based on centralised logic here
@@ -39,52 +32,62 @@ export const AutoCompleteProvider = (props) => {
           [query]: action.query,
         };
       }
+
       // Update the state to show item user has selected
-      case 'UPDATE_SELECTED_ITEM': {
-        const item = 'selectedItem'; // If 'to' exists in payload then make sure we set the correct field
-        setSearchParam(item, action.payload.id); // Set URL
+      case 'ADD_SELECTED_ITEM': {
+        const item = 'selectedItems'; // If 'to' exists in payload then make sure we set the correct field
+        const idIsAdded = getSearchParam(item)?.includes(action.payload.id);
+        if (!idIsAdded) {
+          setSearchParam(
+            item,
+            getSearchParam(item)
+              ? `${getSearchParam(item)} ${action.payload.id}`
+              : action.payload.id
+          );
+        }
+        // Set URL
+        delSearchParam('query'); // clear search param on select
 
         return {
           ...state,
-          [item]: action.payload,
-        };
-      }
-      // Update the state to show item user has selected
-      case 'UPDATE_SELECTED_ITEM_LINES': {
-        return {
-          ...state,
-          selectedItem: {
-            ...state.selectedItem,
-            lines: action.payload,
-          },
+          query: '',
+          [item]: [...state[item], action.payload],
         };
       }
 
       // Used to cancel selected service/station etc. This is mainly used when using from/to stations
-      case 'RESET_SELECTED_ITEM': {
-        // If action.payload ('to') exists in payload then make sure we set the correct field
-        const item = 'selectedItem';
-        const query = 'query';
+      case 'REMOVE_SELECTED_ITEM': {
         // Delete correct things from URL
-        delSearchParam(item);
-        delSearchParam(query);
+        const params = getSearchParam('selectedItems')
+          .split(' ')
+          .filter((param) => param !== action.id);
+
+        setSearchParam('selectedItems', params.join(' '));
 
         // Update state with deleted/cancelled service/item
         return {
           ...state,
-          [query]: '',
-          [item]: {},
+          selectedItems: action.payload,
         };
       }
 
-      // Used to reset everything
-      case 'RESET_SELECTED_SERVICES':
-        delSearchParam('selectedItem');
+      // Used to cancel selected service/station etc. This is mainly used when using from/to stations
+      case 'RESET_QUERY': {
         delSearchParam('query');
         return {
+          ...state,
           query: '',
-          selectedItem: {},
         };
+      }
+
+      // Used to cancel selected service/station etc. This is mainly used when using from/to stations
+      case 'SHOW_AUTOCOMPLETE': {
+        return {
+          ...state,
+          showAutocomplete: action.payload,
+        };
+      }
+
       // Default should return intial state if error
       default:
         return initialState;

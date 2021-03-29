@@ -9,7 +9,7 @@ const useAutoCompleteAPI = (apiPath, query) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false); // Set loading state for spinner
   const [errorInfo, setErrorInfo] = useState(); // Placeholder to set error messaging
-  const selectedService = autoCompleteState.selectedItem;
+  const selectedService = autoCompleteState.selectedItems;
   // Reference variables
   const mounted = useRef();
   const source = useRef();
@@ -51,7 +51,7 @@ const useAutoCompleteAPI = (apiPath, query) => {
       // Update selectedItem based on payload set above if item already selected
       if (selectedService.id) {
         autoCompleteDispatch({
-          type: 'UPDATE_SELECTED_ITEM',
+          type: 'ADD_SELECTED_ITEM',
           payload,
         });
       }
