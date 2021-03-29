@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useResetState from '../../customHooks/useResetState';
 // Import components
 import BusAutoComplete from './BusAutocomplete/BusAutoComplete';
@@ -16,10 +16,24 @@ const AutoComplete = () => {
     autoCompleteDispatch,
   } = useResetState();
 
+  const { selectedItems } = autoCompleteState;
+  const [singleCompany, setSingleCompany] = useState(false);
+
   const showSearch = () => {
     autoCompleteDispatch({ type: 'SHOW_AUTOCOMPLETE', payload: true });
   };
-  const sameService = false;
+
+  useEffect(() => {
+    const isSameCompany = selectedItems.every(
+      (service) => service.operator.operatorName === selectedItems[0].operator.operatorName
+    );
+
+    if (isSameCompany) {
+      setSingleCompany(true);
+    } else {
+      setSingleCompany(false);
+    }
+  }, [selectedItems]);
 
   // Render the correct component based on logic in switch statement above
   return (
@@ -41,10 +55,15 @@ const AutoComplete = () => {
                 />
               ))}
             </div>
-            {sameService && (
+            {singleCompany ? (
               <p>
-                If you are only travelling on National Express West Midlands buses, you can buy
-                tickets which only work with these buses.
+                If you are only travelling on {selectedItems[0].operator.operatorName} buses, you
+                can buy tickets which only work with these buses.
+              </p>
+            ) : (
+              <p>
+                If you are travelling with more than one bus company, you’ll need to buy an nBus
+                ticket.
               </p>
             )}
             {!autoCompleteState.showAutocomplete && (
@@ -59,7 +78,11 @@ const AutoComplete = () => {
                 </div>
                 <div className="wmnds-col-1-1 wmnds-col-md-1-2">
                   <Button
-                    text="Find a ticket"
+                    text={
+                      singleCompany
+                        ? `Select a ${selectedItems[0].operator.operatorName} ticket`
+                        : 'Select a nBus ticket'
+                    }
                     iconRight="general-chevron-right"
                     btnClass="wmnds-btn--block wmnds-text-align-left"
                   />

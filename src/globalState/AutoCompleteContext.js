@@ -11,7 +11,7 @@ export const AutoCompleteContext = createContext(); // Create when context
 export const AutoCompleteProvider = (props) => {
   const { children } = props || {};
 
-  // Set intial state of when
+  // Set intial state
   const initialState = {
     query: getSearchParam('query') || '',
     // // The selected service is used to store details when a user has clicked an autocomplete
