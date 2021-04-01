@@ -10,19 +10,14 @@ import s from './AutoComplete.module.scss';
 import SelectedService from './SelectedService/SelectedService';
 
 const AutoComplete = ({ loading }) => {
-  const {
-    resetQuery,
-    removeSelectedItem,
-    autoCompleteState,
-    autoCompleteDispatch,
-  } = useResetState();
+  const { removeSelectedItem, autoCompleteState, autoCompleteDispatch } = useResetState();
 
   const { selectedItems } = autoCompleteState;
   const [singleCompany, setSingleCompany] = useState(false);
   const [ticketURL, setTicketURL] = useState('https://find-a-ticket.wmnetwork.co.uk/');
 
-  const showSearch = () => {
-    autoCompleteDispatch({ type: 'SHOW_AUTOCOMPLETE', payload: true });
+  const showSearch = (show = true) => {
+    autoCompleteDispatch({ type: 'SHOW_AUTOCOMPLETE', payload: show });
   };
 
   useEffect(() => {
@@ -58,7 +53,7 @@ const AutoComplete = ({ loading }) => {
       ) : (
         <>
           {autoCompleteState.selectedItems.length > 0 && (
-            <div className="wmnds-m-b-lg">
+            <div className="wmnds-m-b-md">
               <>
                 <div className="wmnds-m-b-md wmnds-p-b-xsm">
                   {autoCompleteState.selectedItems.map((service) => (
@@ -84,7 +79,7 @@ const AutoComplete = ({ loading }) => {
                 )}
                 {!autoCompleteState.showAutocomplete && (
                   <div className="wmnds-grid wmnds-grid--spacing-md-2-lg">
-                    <div className="wmnds-col-1-1 wmnds-col-md-1-2">
+                    <div className="wmnds-col-1-1 wmnds-col-md-1-2 wmnds-m-b-md">
                       <Button
                         text="Add another bus service"
                         iconRight="general-expand"
@@ -116,10 +111,10 @@ const AutoComplete = ({ loading }) => {
           <div className="wmnds-grid wmnds-grid--spacing-md-2-md">
             <div className={`${s.autoCompleteContainer} wmnds-col-md-3-4`}>
               <BusAutoComplete />
-              {autoCompleteState.query !== '' && (
+              {autoCompleteState.selectedItems.length > 0 && (
                 <button
                   type="button"
-                  onClick={resetQuery}
+                  onClick={() => showSearch(false)}
                   className={`${s.mobileReset} wmnds-hide-desktop`}
                 >
                   <Icon iconName="general-cross" />
@@ -127,11 +122,11 @@ const AutoComplete = ({ loading }) => {
               )}
             </div>
             <div className={`${s.desktopReset} wmnds-col-md-1-4`}>
-              {autoCompleteState.query !== '' && (
+              {autoCompleteState.selectedItems.length > 0 && (
                 <Button
                   btnClass="wmnds-btn--primary wmnds-btn--block"
                   text="Cancel"
-                  onClick={resetQuery}
+                  onClick={() => showSearch(false)}
                 />
               )}
             </div>

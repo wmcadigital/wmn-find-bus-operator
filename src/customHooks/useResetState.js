@@ -13,12 +13,6 @@ const useResetState = () => {
     }
   };
 
-  const resetQuery = () => {
-    autoCompleteDispatch({
-      type: 'RESET_QUERY',
-    });
-  };
-
   // Function used in busautocomplete.js to update busautocomplete state and reset any state "below" it in the tray
   const updateQuery = (query) => {
     autoCompleteDispatch({ type: 'UPDATE_QUERY', query: query.trim() }); // Update query to what user has typed & trim
@@ -26,7 +20,6 @@ const useResetState = () => {
 
   return {
     updateQuery,
-    resetQuery,
     autoCompleteState,
     autoCompleteDispatch,
     removeSelectedItem,

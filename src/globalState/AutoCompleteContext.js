@@ -73,15 +73,6 @@ export const AutoCompleteProvider = (props) => {
       }
 
       // Used to cancel selected service/station etc. This is mainly used when using from/to stations
-      case 'RESET_QUERY': {
-        delSearchParam('query');
-        return {
-          ...state,
-          query: '',
-        };
-      }
-
-      // Used to cancel selected service/station etc. This is mainly used when using from/to stations
       case 'SHOW_AUTOCOMPLETE': {
         return {
           ...state,
