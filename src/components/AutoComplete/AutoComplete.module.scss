@@ -32,3 +32,17 @@
     fill: get-color(secondary);
   }
 }
+
+.leftAlignBtn {
+  display: flex;
+  min-height: 50px;
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: left;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    flex: 0 0 22px;
+  }
+}
