@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import useResetState from '../../customHooks/useResetState';
 // Import components
 import BusAutoComplete from './BusAutocomplete/BusAutoComplete';
@@ -8,7 +9,7 @@ import Icon from '../shared/Icon/Icon';
 import s from './AutoComplete.module.scss';
 import SelectedService from './SelectedService/SelectedService';
 
-const AutoComplete = () => {
+const AutoComplete = ({ loading }) => {
   const {
     resetQuery,
     removeSelectedItem,
@@ -41,6 +42,11 @@ const AutoComplete = () => {
       <h3 className={autoCompleteState.selectedItems.length === 0 ? 'wmnds-p-b-xsm' : ''}>
         Search for a bus route
       </h3>
+      {loading && (
+        <div className="wmnds-loader wmnds-loader--small" role="alert" aria-live="assertive">
+          <p className="wmnds-loader__content">Content is loading...</p>
+        </div>
+      )}
       {autoCompleteState.selectedItems.length > 0 && (
         <div className="wmnds-m-b-lg">
           <>
@@ -81,7 +87,7 @@ const AutoComplete = () => {
                     text={
                       singleCompany
                         ? `Select a ${selectedItems[0].operator.operatorName} ticket`
-                        : 'Select a nBus ticket'
+                        : 'Select an nBus ticket'
                     }
                     iconRight="general-chevron-right"
                     btnClass="wmnds-btn--block wmnds-text-align-left"
@@ -122,6 +128,14 @@ const AutoComplete = () => {
       )}
     </div>
   );
+};
+
+AutoComplete.propTypes = {
+  loading: PropTypes.bool,
+};
+
+AutoComplete.defaultProps = {
+  loading: false,
 };
 
 export default AutoComplete;
