@@ -20,7 +20,9 @@ const FindBusRoute = () => {
                 Search for a bus route to find out who is running your service. Private companies
                 run bus services, not West Midlands Network.
               </p>
-              <div className="wmnds-m-b-md">{loading ? 'loading' : <AutoComplete />}</div>
+              <div className="wmnds-m-b-md">
+                <AutoComplete loading={loading} />
+              </div>
               <p className="wmnds-m-none">
                 If you don’t know what bus route you need,{' '}
                 <a href="https://journeyplanner.networkwestmidlands.com/" className="wmnds-link">

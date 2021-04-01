@@ -21,6 +21,10 @@ const BusAutoComplete = () => {
     autoCompleteState.query
   );
 
+  const resultsToShow = results
+    .filter((item) => !autoCompleteState.selectedItems.find((s) => s.id === item.id))
+    .sort((a, b) => a.serviceNumber.replace(/\D/g, '') - b.serviceNumber.replace(/\D/g, ''));
+
   // Import handleKeyDown function from customHook (used by all modes)
   const { handleKeyDown } = useHandleAutoCompleteKeys(
     resultsList,
@@ -65,17 +69,13 @@ const BusAutoComplete = () => {
         // Only show autocomplete results if there is a query
         autoCompleteState.query && (
           <ul className="wmnds-autocomplete-suggestions" ref={resultsList}>
-            {results
-              .sort(
-                (a, b) => a.serviceNumber.replace(/\D/g, '') - b.serviceNumber.replace(/\D/g, '')
-              )
-              .map((result) => (
-                <BusAutoCompleteResult
-                  key={result.id}
-                  result={result}
-                  handleKeyDown={handleKeyDown}
-                />
-              ))}
+            {resultsToShow.map((result) => (
+              <BusAutoCompleteResult
+                key={result.id}
+                result={result}
+                handleKeyDown={handleKeyDown}
+              />
+            ))}
           </ul>
         )
       )}

@@ -42,61 +42,66 @@ const AutoComplete = ({ loading }) => {
       <h3 className={autoCompleteState.selectedItems.length === 0 ? 'wmnds-p-b-xsm' : ''}>
         Search for a bus route
       </h3>
-      {loading && (
-        <div className="wmnds-loader wmnds-loader--small" role="alert" aria-live="assertive">
-          <p className="wmnds-loader__content">Content is loading...</p>
+      {loading ? (
+        <div className="wmnds-p-t-lg wmnds-p-b-lg">
+          <div className="wmnds-loader wmnds-loader--small" role="alert" aria-live="assertive">
+            <p className="wmnds-loader__content">Content is loading...</p>
+          </div>
         </div>
-      )}
-      {autoCompleteState.selectedItems.length > 0 && (
-        <div className="wmnds-m-b-lg">
-          <>
-            <div className="wmnds-m-b-md wmnds-p-b-xsm">
-              {autoCompleteState.selectedItems.map((service) => (
-                <SelectedService
-                  key={service.id}
-                  routeName={service.operator.routeName}
-                  operatorName={service.operator.operatorName}
-                  serviceNumber={service.serviceNumber}
-                  onRemove={() => removeSelectedItem(service.id)}
-                />
-              ))}
+      ) : (
+        <>
+          {autoCompleteState.selectedItems.length > 0 && (
+            <div className="wmnds-m-b-lg">
+              <>
+                <div className="wmnds-m-b-md wmnds-p-b-xsm">
+                  {autoCompleteState.selectedItems.map((service) => (
+                    <SelectedService
+                      key={service.id}
+                      routeName={service.operator.routeName}
+                      operatorName={service.operator.operatorName}
+                      serviceNumber={service.serviceNumber}
+                      onRemove={() => removeSelectedItem(service.id)}
+                    />
+                  ))}
+                </div>
+                {singleCompany ? (
+                  <p>
+                    If you are only travelling on {selectedItems[0].operator.operatorName} buses,
+                    you can buy tickets which only work with these buses.
+                  </p>
+                ) : (
+                  <p>
+                    If you are travelling with more than one bus company, you’ll need to buy an nBus
+                    ticket.
+                  </p>
+                )}
+                {!autoCompleteState.showAutocomplete && (
+                  <div className="wmnds-grid wmnds-grid--spacing-md-2-lg">
+                    <div className="wmnds-col-1-1 wmnds-col-md-1-2">
+                      <Button
+                        text="Add another bus service"
+                        iconRight="general-expand"
+                        btnClass="wmnds-btn--block wmnds-btn--primary"
+                        onClick={showSearch}
+                      />
+                    </div>
+                    <div className="wmnds-col-1-1 wmnds-col-md-1-2">
+                      <Button
+                        text={
+                          singleCompany
+                            ? `Select a ${selectedItems[0].operator.operatorName} ticket`
+                            : 'Select an nBus ticket'
+                        }
+                        iconRight="general-chevron-right"
+                        btnClass="wmnds-btn--block wmnds-text-align-left"
+                      />
+                    </div>
+                  </div>
+                )}
+              </>
             </div>
-            {singleCompany ? (
-              <p>
-                If you are only travelling on {selectedItems[0].operator.operatorName} buses, you
-                can buy tickets which only work with these buses.
-              </p>
-            ) : (
-              <p>
-                If you are travelling with more than one bus company, you’ll need to buy an nBus
-                ticket.
-              </p>
-            )}
-            {!autoCompleteState.showAutocomplete && (
-              <div className="wmnds-grid wmnds-grid--spacing-md-2-lg">
-                <div className="wmnds-col-1-1 wmnds-col-md-1-2">
-                  <Button
-                    text="Add another bus service"
-                    iconRight="general-expand"
-                    btnClass="wmnds-btn--block wmnds-btn--primary"
-                    onClick={showSearch}
-                  />
-                </div>
-                <div className="wmnds-col-1-1 wmnds-col-md-1-2">
-                  <Button
-                    text={
-                      singleCompany
-                        ? `Select a ${selectedItems[0].operator.operatorName} ticket`
-                        : 'Select an nBus ticket'
-                    }
-                    iconRight="general-chevron-right"
-                    btnClass="wmnds-btn--block wmnds-text-align-left"
-                  />
-                </div>
-              </div>
-            )}
-          </>
-        </div>
+          )}
+        </>
       )}
       {autoCompleteState.showAutocomplete && (
         <>
