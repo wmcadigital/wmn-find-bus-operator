@@ -17,13 +17,18 @@ const BusAutoComplete = () => {
   const debounceInput = useRef(null);
 
   const { loading, errorInfo, results, getAutoCompleteResults } = useAutoCompleteAPI(
-    `/api/lineinfo?q=${encodeURI(autoCompleteState.query).replace(/\D+/g, '')}`, // remove letters from query
+    `/api/lineinfo?q=${encodeURI(autoCompleteState.query)}`,
     autoCompleteState.query
   );
 
   const resultsToShow = results
     .filter((item) => !autoCompleteState.selectedItems.find((s) => s.id === item.id))
-    .sort((a, b) => a.serviceNumber.replace(/\D/g, '') - b.serviceNumber.replace(/\D/g, ''));
+    .sort((a, b) =>
+      a.serviceNumber.localeCompare(b.serviceNumber, navigator.languages[0] || navigator.language, {
+        numeric: true,
+        ignorePunctuation: true,
+      })
+    ); // Sort results alphanumerically
 
   // Import handleKeyDown function from customHook (used by all modes)
   const { handleKeyDown } = useHandleAutoCompleteKeys(
@@ -57,7 +62,7 @@ const BusAutoComplete = () => {
         />
       </div>
       {/* If there is no data.length(results) and the user hasn't submitted a query and the state isn't loading then the user should be displayed with no results message, else show results */}
-      {!results.length && autoCompleteState.query && !loading && errorInfo ? (
+      {!resultsToShow.length && autoCompleteState.query && !loading && errorInfo ? (
         <Message
           type="error"
           title={errorInfo.title}
