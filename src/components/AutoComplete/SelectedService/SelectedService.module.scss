@@ -1,0 +1,56 @@
+// Refer to https://create-react-app.dev/docs/adding-a-css-modules-stylesheet
+// On how to use scss modules with React
+
+// Import WMN Design System scss for use in this scss file
+// Tilde (~) represents the root folder(src)
+@import '~assets/wmnds/vars';
+@import '~assets/wmnds/mixins';
+
+.selectedService {
+  padding: $size-md 0;
+  border-bottom: 1px solid get-color(text, 70);
+  @media screen and (min-width: $breakpoint-md) {
+    flex-wrap: nowrap;
+  }
+
+  .routeNumber {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    color: $white;
+    background-color: get-color(secondary);
+    font-weight: bold;
+    line-height: 50px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .serviceName {
+    padding: 0 $size-md;
+    flex: 1 1 calc(100% - 50px);
+
+    strong {
+      display: block;
+    }
+  }
+
+  .removeBtn {
+    flex-grow: 1;
+
+    button {
+      width: 100%;
+      margin-top: $size-sm;
+      @media screen and (min-width: $breakpoint-md) {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        font-size: 0;
+
+        svg {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
