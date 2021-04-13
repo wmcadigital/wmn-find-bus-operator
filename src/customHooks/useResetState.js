@@ -5,13 +5,13 @@ import { AutoCompleteContext } from 'globalState';
 const useResetState = () => {
   const [autoCompleteState, autoCompleteDispatch] = useContext(AutoCompleteContext); // Get the state of autoComplete from AutoCompleteContext
 
-  // // Function for checking and resetting any selected service or query
-  // const resetQueryAndSelected = () => {
-  //   // Reset selected disruption ID from map (if any)
-  //   if (autoCompleteState.selectedItem.id || autoCompleteState.query) {
-  //     autoCompleteDispatch({ type: 'RESET_SELECTED_SERVICES' });
-  //   }
-  // };
+  const removeSelectedItem = (id) => {
+    const payload = autoCompleteState.selectedItems.filter((item) => item.id !== id);
+    autoCompleteDispatch({ type: 'REMOVE_SELECTED_ITEM', id, payload });
+    if (!payload.length) {
+      autoCompleteDispatch({ type: 'SHOW_AUTOCOMPLETE', payload: true });
+    }
+  };
 
   // Function used in busautocomplete.js to update busautocomplete state and reset any state "below" it in the tray
   const updateQuery = (query) => {
@@ -22,6 +22,7 @@ const useResetState = () => {
     updateQuery,
     autoCompleteState,
     autoCompleteDispatch,
+    removeSelectedItem,
   };
 };
 

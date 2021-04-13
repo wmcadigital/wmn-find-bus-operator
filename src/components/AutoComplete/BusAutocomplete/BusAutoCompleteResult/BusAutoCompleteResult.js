@@ -11,13 +11,14 @@ const BusAutoCompleteResult = (props) => {
 
   const updateSelectedService = () => {
     autoCompleteDispatch({
-      type: 'UPDATE_SELECTED_ITEM',
+      type: 'ADD_SELECTED_ITEM',
       payload: {
         id: result.id,
         operator: result.routes[0],
         serviceNumber: result.serviceNumber,
       },
     });
+    autoCompleteDispatch({ type: 'SHOW_AUTOCOMPLETE', payload: false });
   };
 
   // Return service with the above disruption logic, replace type and iconName with correc icon and class depending on disruption type
