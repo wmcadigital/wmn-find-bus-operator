@@ -17,8 +17,8 @@ const BusAutoComplete = () => {
   const debounceInput = useRef(null);
 
   const { loading, errorInfo, results, getAutoCompleteResults } = useAutoCompleteAPI(
-    `/api/lineinfo?q=${encodeURI(autoCompleteState.query)}`,
-    autoCompleteState.query
+    `/api/lineinfo?q=${encodeURI(autoCompleteState.query.toLowerCase())}`,
+    autoCompleteState.query.toLowerCase()
   );
 
   const resultsToShow = results
