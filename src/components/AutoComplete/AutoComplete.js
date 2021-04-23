@@ -14,7 +14,9 @@ const AutoComplete = ({ loading }) => {
 
   const { selectedItems } = autoCompleteState;
   const [singleCompany, setSingleCompany] = useState(false);
-  const [ticketURL, setTicketURL] = useState('https://find-a-ticket.wmnetwork.co.uk/?proceed=true');
+  const [ticketURL, setTicketURL] = useState(
+    'https://deploy-preview-34--wmn-find-a-ticket.netlify.app/?proceed=true'
+  );
 
   const showSearch = (show = true) => {
     autoCompleteDispatch({ type: 'SHOW_AUTOCOMPLETE', payload: show });
@@ -29,11 +31,11 @@ const AutoComplete = ({ loading }) => {
       if (isSameCompany) {
         setSingleCompany(true);
         setTicketURL(
-          `https://find-a-ticket.wmnetwork.co.uk/?type=single&busCompany=${selectedItems[0].operator.operatorCode}`
+          `https://deploy-preview-34--wmn-find-a-ticket.netlify.app/?type=single&busCompany=${selectedItems[0].operator.operatorCode}`
         );
       } else {
         setSingleCompany(false);
-        setTicketURL('https://find-a-ticket.wmnetwork.co.uk/?type=nBus');
+        setTicketURL('https://deploy-preview-34--wmn-find-a-ticket.netlify.app/?type=nBus');
       }
     }
   }, [selectedItems]);

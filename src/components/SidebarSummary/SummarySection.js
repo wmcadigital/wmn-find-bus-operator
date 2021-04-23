@@ -8,7 +8,10 @@ const SummarySection = ({ title, value }) => {
       <div className="wmnds-grid wmnds-grid--justify-between wmnds-m-b-xsm">
         <strong className="wmnds-col-2-3">{title}</strong>
         <div className="wmnds-col-1-3 wmnds-text-align-right">
-          <a href="https://find-a-ticket.wmnetwork.co.uk/" className="wmnds-btn wmnds-btn--link">
+          <a
+            href="https://deploy-preview-34--wmn-find-a-ticket.netlify.app/"
+            className="wmnds-btn wmnds-btn--link"
+          >
             Change
           </a>
         </div>
