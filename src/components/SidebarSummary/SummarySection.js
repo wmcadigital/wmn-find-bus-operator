@@ -9,7 +9,7 @@ const SummarySection = ({ title, value }) => {
         <strong className="wmnds-col-2-3">{title}</strong>
         <div className="wmnds-col-1-3 wmnds-text-align-right">
           <a
-            href="https://deploy-preview-34--wmn-find-a-ticket.netlify.app/"
+            href="https://deploy-preview-34--wmn-find-a-ticket.netlify.app/?proceed"
             className="wmnds-btn wmnds-btn--link"
           >
             Change
