@@ -10,7 +10,7 @@ function SelectedService({ routeName, operatorName, serviceNumber, onRemove }) {
         <div className={s.routeNumber}>{serviceNumber}</div>
       </div>
       <div className={`wmnds-col-auto ${s.serviceName}`}>
-        {routeName} is operated by <strong>{operatorName}</strong>
+        {routeName} is operated by <strong>{operatorName.replace(':', "'")}</strong>
       </div>
       <div className={`wmnds-col-auto ${s.removeBtn}`}>
         <Button

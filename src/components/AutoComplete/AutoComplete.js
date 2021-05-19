@@ -60,7 +60,7 @@ const AutoComplete = ({ loading }) => {
                     <SelectedService
                       key={service.id}
                       routeName={service.operator.routeName}
-                      operatorName={service.operator.operatorName}
+                      operatorName={service.operator.operatorName.replace(':', "'")}
                       serviceNumber={service.serviceNumber}
                       onRemove={() => removeSelectedItem(service.id)}
                     />
@@ -70,8 +70,9 @@ const AutoComplete = ({ loading }) => {
                   <>
                     {singleCompany ? (
                       <p>
-                        If you are only travelling on {selectedItems[0].operator.operatorName}{' '}
-                        buses, you can buy tickets which only work with these buses.
+                        If you are only travelling on{' '}
+                        {selectedItems[0].operator.operatorName.replace(':', "'")} buses, you can
+                        buy tickets which only work with these buses.
                       </p>
                     ) : (
                       <p>
@@ -98,7 +99,10 @@ const AutoComplete = ({ loading }) => {
                           className={`${s.leftAlignBtn} wmnds-btn wmnds-btn--block wmnds-btn__icon wmnds-btn__icon--right`}
                         >
                           {singleCompany
-                            ? `Select a ${selectedItems[0].operator.operatorName} ticket`
+                            ? `Select a ${selectedItems[0].operator.operatorName.replace(
+                                ':',
+                                "'"
+                              )} ticket`
                             : 'Select an nBus ticket'}
                           <Icon iconName="general-chevron-right" />
                         </a>

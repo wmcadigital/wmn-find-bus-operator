@@ -43,7 +43,9 @@ const BusAutoCompleteResult = (props) => {
       {/* Right section */}
       <div className="wmnds-col-auto">
         <div>{result.routes[0].routeName}</div>
-        <strong className={`${s.routeName}`}>{result.routes[0].operatorName}</strong>
+        <strong className={`${s.routeName}`}>
+          {result.routes[0].operatorName.replace(':', "'")}
+        </strong>
       </div>
     </li>
   );
