@@ -59,6 +59,7 @@ const BusAutoComplete = () => {
           debounceTimeout={600}
           onKeyDown={(e) => handleKeyDown(e)}
           inputRef={debounceInput}
+          autoComplete="off"
         />
       </div>
       {/* If there is no data.length(results) and the user hasn't submitted a query and the state isn't loading then the user should be displayed with no results message, else show results */}
