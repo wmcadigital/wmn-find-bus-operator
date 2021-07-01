@@ -29,7 +29,9 @@ const AutoComplete = ({ loading }) => {
       if (isSameCompany) {
         setSingleCompany(true);
         setTicketURL(
-          `https://find-a-ticket.wmnetwork.co.uk/?type=single&busCompany=${selectedItems[0].operator.operatorCode}`
+          `https://find-a-ticket.wmnetwork.co.uk/?type=single&useOperator=${encodeURI(
+            selectedItems[0].operator.operatorName.replace(':', "'")
+          )}`
         );
       } else {
         setSingleCompany(false);

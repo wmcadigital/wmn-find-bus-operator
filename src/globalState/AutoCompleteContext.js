@@ -10,11 +10,20 @@ export const AutoCompleteContext = createContext(); // Create when context
 
 export const AutoCompleteProvider = (props) => {
   const { children } = props || {};
+  // Grt modes from url param and ensure they are valid
+  const getModes = () => {
+    const validModes = ['bus', 'train', 'tram'];
+    return getSearchParam('modes')
+      ? getSearchParam('modes')
+          .split(' ')
+          .filter((mode) => validModes.includes(mode))
+      : null;
+  };
 
   // Set intial state
   const initialState = {
     query: getSearchParam('query') || '',
-    modes: getSearchParam('modes')?.split(' ') || null,
+    modes: getModes().length ? getModes() : null,
     ticketMode: getSearchParam('ticketSearch') === 'true',
     // // The selected service is used to store details when a user has clicked an autocomplete
     showAutocomplete: true,

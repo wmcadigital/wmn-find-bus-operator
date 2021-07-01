@@ -1,0 +1,5 @@
+# domain redirects
+https://wmn-find-bus-company.netlify.app/* https://find-bus-company.tfwm.org.uk/:splat 301!
+https://find-bus-company.wmnetwork.co.uk/* https://find-bus-company.tfwm.org.uk/:splat 301!
+https://wmn-find-bus-operator.netlify.app/* https://find-bus-company.tfwm.org.uk/:splat 301!
+https://find-bus-operator.wmnetwork.co.uk/* https://find-bus-company.tfwm.org.uk/:splat 301!
