@@ -23,7 +23,7 @@ export const AutoCompleteProvider = (props) => {
   // Set intial state
   const initialState = {
     query: getSearchParam('query') || '',
-    modes: getModes().length ? getModes() : null,
+    modes: getModes() ? getModes() : null,
     ticketMode: getSearchParam('ticketSearch') === 'true',
     // // The selected service is used to store details when a user has clicked an autocomplete
     showAutocomplete: true,
