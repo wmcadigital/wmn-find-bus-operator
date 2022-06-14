@@ -28,7 +28,7 @@ const FindBusRoute = () => {
           <div className={`${s.mainCard} bg-white`}>
             <p>
               Search for a bus route to find out who is running your service. Private companies run
-              bus services, not West Midlands Network.
+              bus services, not Transport for West Midlands.
             </p>
             <div className="wmnds-m-b-md">
               <AutoComplete loading={loading} />
