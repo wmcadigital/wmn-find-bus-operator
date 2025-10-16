@@ -42,7 +42,7 @@ const useAutoCompleteAPI = (apiPath, query) => {
         });
       }
     },
-    [query],
+    [query]
   );
 
   const handleAutoCompleteApiError = (error) => {
