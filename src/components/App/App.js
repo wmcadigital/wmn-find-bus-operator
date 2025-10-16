@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ContextProvider from 'globalState/ContextProvider';
 import FindBusRoute from '../FindBusRoute/FindBusRoute';
 
