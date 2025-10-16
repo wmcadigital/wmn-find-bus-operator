@@ -7,8 +7,7 @@ Copyright © 2019 Javan Makhmali
   'use strict';
   var element = document.createElement('details');
   var elementIsNative =
-    typeof HTMLDetailsElement != 'undefined' &&
-    element instanceof HTMLDetailsElement;
+    typeof HTMLDetailsElement != 'undefined' && element instanceof HTMLDetailsElement;
   var support = {
     open: 'open' in element || elementIsNative,
     toggle: 'ontoggle' in element,
@@ -28,10 +27,7 @@ Copyright © 2019 Javan Makhmali
     polyfillToggleEvent();
   }
   function polyfillStyles() {
-    document.head.insertAdjacentHTML(
-      'afterbegin',
-      '<style>' + styles + '</style>'
-    );
+    document.head.insertAdjacentHTML('afterbegin', '<style>' + styles + '</style>');
   }
   function polyfillProperties() {
     var prototype = document.createElement('details').constructor.prototype;
@@ -51,9 +47,7 @@ Copyright © 2019 Javan Makhmali
         },
         set: function set(value) {
           if (this.tagName == 'DETAILS') {
-            return value
-              ? this.setAttribute('open', '')
-              : this.removeAttribute('open');
+            return value ? this.setAttribute('open', '') : this.removeAttribute('open');
           } else {
             if (open && open.set) {
               return open.set.call(this, value);
@@ -155,8 +149,7 @@ Copyright © 2019 Javan Makhmali
     findElementsWithTagName(root, 'SUMMARY').forEach(function (summary) {
       var details = findClosestElementWithTagName(summary, 'DETAILS');
       summary.setAttribute('aria-expanded', details.hasAttribute('open'));
-      if (!summary.hasAttribute('tabindex'))
-        summary.setAttribute('tabindex', '0');
+      if (!summary.hasAttribute('tabindex')) summary.setAttribute('tabindex', '0');
       if (!summary.hasAttribute('role')) summary.setAttribute('role', 'button');
     });
   }
@@ -175,43 +168,29 @@ Copyright © 2019 Javan Makhmali
       function (event) {
         if (eventIsSignificant(event)) {
           if (event.which <= 1) {
-            var element = findClosestElementWithTagName(
-              event.target,
-              'SUMMARY'
-            );
-            if (
-              element &&
-              element.parentNode &&
-              element.parentNode.tagName == 'DETAILS'
-            ) {
+            var element = findClosestElementWithTagName(event.target, 'SUMMARY');
+            if (element && element.parentNode && element.parentNode.tagName == 'DETAILS') {
               callback(element.parentNode);
             }
           }
         }
       },
-      false
+      false,
     );
     addEventListener(
       'keydown',
       function (event) {
         if (eventIsSignificant(event)) {
           if (event.keyCode == 13 || event.keyCode == 32) {
-            var element = findClosestElementWithTagName(
-              event.target,
-              'SUMMARY'
-            );
-            if (
-              element &&
-              element.parentNode &&
-              element.parentNode.tagName == 'DETAILS'
-            ) {
+            var element = findClosestElementWithTagName(event.target, 'SUMMARY');
+            if (element && element.parentNode && element.parentNode.tagName == 'DETAILS') {
               callback(element.parentNode);
               event.preventDefault();
             }
           }
         }
       },
-      false
+      false,
     );
   }
   function triggerToggle(element) {
@@ -223,7 +202,7 @@ Copyright © 2019 Javan Makhmali
     return (root.tagName == tagName ? [root] : []).concat(
       typeof root.getElementsByTagName == 'function'
         ? slice.call(root.getElementsByTagName(tagName))
-        : []
+        : [],
     );
   }
   function findClosestElementWithTagName(element, tagName) {

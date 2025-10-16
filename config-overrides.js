@@ -10,7 +10,7 @@ module.exports = {
       config.plugins.push(
         new SassLintPlugin({
           // options here
-        })
+        }),
       );
     }
 
