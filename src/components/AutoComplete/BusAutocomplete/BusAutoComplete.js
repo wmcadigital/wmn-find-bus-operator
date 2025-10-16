@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { DebounceInput } from 'react-debounce-input'; // https://www.npmjs.com/package/react-debounce-input
 // CustomHooks
 import useResetState from 'customHooks/useResetState';
@@ -10,7 +10,7 @@ import BusAutoCompleteResult from './BusAutoCompleteResult/BusAutoCompleteResult
 import useHandleAutoCompleteKeys from '../customHooks/useHandleAutoCompleteKeys';
 import useAutoCompleteAPI from '../customHooks/useAutoCompleteAPI';
 
-const BusAutoComplete = () => {
+function BusAutoComplete() {
   const { updateQuery, autoCompleteState } = useResetState();
 
   const resultsList = useRef(null);
@@ -22,13 +22,21 @@ const BusAutoComplete = () => {
   );
 
   const resultsToShow = results
-    .filter((item) => !autoCompleteState.selectedItems.find((s) => s.id === item.id))
-    .sort((a, b) =>
-      a.serviceNumber.localeCompare(b.serviceNumber, navigator.languages[0] || navigator.language, {
-        numeric: true,
-        ignorePunctuation: true,
-      })
-    ); // Sort results alphanumerically
+    .filter(function filterResults(item) {
+      return !autoCompleteState.selectedItems.find(function findSelected(s) {
+        return s.id === item.id;
+      });
+    })
+    .sort(function sortResults(a, b) {
+      return a.serviceNumber.localeCompare(
+        b.serviceNumber,
+        navigator.languages[0] || navigator.language,
+        {
+          numeric: true,
+          ignorePunctuation: true,
+        }
+      );
+    }); // Sort results alphanumerically
 
   // Import handleKeyDown function from customHook (used by all modes)
   const { handleKeyDown } = useHandleAutoCompleteKeys(
@@ -36,6 +44,32 @@ const BusAutoComplete = () => {
     DebounceInput,
     autoCompleteState
   );
+
+  const handleInputChange = useCallback(
+    (e) => {
+      updateQuery(e.target.value);
+    },
+    [updateQuery]
+  );
+
+  const handleInputKeyDown = useCallback(
+    (e) => {
+      handleKeyDown(e);
+    },
+    [handleKeyDown]
+  );
+
+  function renderResults() {
+    return (
+      <ul className="wmnds-autocomplete-suggestions" ref={resultsList}>
+        {resultsToShow.map(function renderResult(result) {
+          return (
+            <BusAutoCompleteResult key={result.id} result={result} handleKeyDown={handleKeyDown} />
+          );
+        })}
+      </ul>
+    );
+  }
 
   return (
     <>
@@ -54,10 +88,10 @@ const BusAutoComplete = () => {
           placeholder="Search for a bus service"
           className="wmnds-fe-input wmnds-autocomplete__input wmnds-col-1"
           value={autoCompleteState.query || ''}
-          onChange={(e) => updateQuery(e.target.value)}
+          onChange={handleInputChange}
           aria-label="Search for a bus service"
           debounceTimeout={600}
-          onKeyDown={(e) => handleKeyDown(e)}
+          onKeyDown={handleInputKeyDown}
           inputRef={debounceInput}
           autoComplete="off"
         />
@@ -73,20 +107,10 @@ const BusAutoComplete = () => {
         />
       ) : (
         // Only show autocomplete results if there is a query
-        autoCompleteState.query && (
-          <ul className="wmnds-autocomplete-suggestions" ref={resultsList}>
-            {resultsToShow.map((result) => (
-              <BusAutoCompleteResult
-                key={result.id}
-                result={result}
-                handleKeyDown={handleKeyDown}
-              />
-            ))}
-          </ul>
-        )
+        autoCompleteState.query && renderResults()
       )}
     </>
   );
-};
+}
 
 export default BusAutoComplete;
