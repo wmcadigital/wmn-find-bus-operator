@@ -87,6 +87,7 @@ function AutoComplete({ loading }) {
                     iconRight="general-expand"
                     btnClass={`${s.leftAlignBtn} wmnds-btn--block wmnds-btn--primary`}
                     onClick={showSearch}
+                    aria-label="Add another bus service"
                   />
                 </div>
                 {autoCompleteState.ticketMode && (
