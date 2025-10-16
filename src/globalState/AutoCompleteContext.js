@@ -39,9 +39,7 @@ function reducer(state, action) {
       if (!idIsAdded) {
         setSearchParam(
           item,
-          getSearchParam(item)
-            ? `${getSearchParam(item)} ${action.payload.id}`
-            : action.payload.id
+          getSearchParam(item) ? `${getSearchParam(item)} ${action.payload.id}` : action.payload.id,
         );
       }
       // Set URL
@@ -107,14 +105,12 @@ function AutoCompleteProvider(props) {
     function memoizedContextValue() {
       return [autoCompleteState, autoCompleteDispatch];
     },
-    [autoCompleteState, autoCompleteDispatch]
+    [autoCompleteState, autoCompleteDispatch],
   );
 
   // Pass state and dispatch in context and make accessible to children it wraps
   return (
-    <AutoCompleteContext.Provider value={contextValue}>
-      {children}
-    </AutoCompleteContext.Provider>
+    <AutoCompleteContext.Provider value={contextValue}>{children}</AutoCompleteContext.Provider>
   );
 }
 

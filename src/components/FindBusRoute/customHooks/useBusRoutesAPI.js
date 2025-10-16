@@ -54,7 +54,7 @@ const useBusRoutesAPI = () => {
         });
       }
     },
-    [autoCompleteState.selectedItems, autoCompleteDispatch]
+    [autoCompleteState.selectedItems, autoCompleteDispatch],
   );
 
   const handleAutoCompleteApiError = (error) => {
@@ -89,7 +89,7 @@ const useBusRoutesAPI = () => {
         .then(handleApiResponse)
         .catch(handleAutoCompleteApiError);
     },
-    [handleApiResponse, startApiTimeout]
+    [handleApiResponse, startApiTimeout],
   );
 
   useEffect(() => {

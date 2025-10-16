@@ -30,7 +30,7 @@ const useAutoCompleteAPI = (apiPath, query) => {
       setLoading(false); // Set loading state to false after data is received
       // BUS
       setResults(
-        response.data.services.filter((service) => service.serviceNumber.includes(query)) || []
+        response.data.services.filter((service) => service.serviceNumber.includes(query)) || [],
       ); // If response.data.services isn't there, then we can't map the results to it, so return null
 
       if ((!response.data.data || !response.data.services) && mounted.current) {
@@ -42,7 +42,7 @@ const useAutoCompleteAPI = (apiPath, query) => {
         });
       }
     },
-    [query]
+    [query],
   );
 
   const handleAutoCompleteApiError = (error) => {

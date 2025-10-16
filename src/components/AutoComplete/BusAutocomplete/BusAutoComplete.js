@@ -18,7 +18,7 @@ function BusAutoComplete() {
 
   const { loading, errorInfo, results, getAutoCompleteResults } = useAutoCompleteAPI(
     `/api/lineinfo?q=${encodeURI(autoCompleteState.query.toLowerCase())}`,
-    autoCompleteState.query.toLowerCase()
+    autoCompleteState.query.toLowerCase(),
   );
 
   const resultsToShow = results
@@ -34,7 +34,7 @@ function BusAutoComplete() {
         {
           numeric: true,
           ignorePunctuation: true,
-        }
+        },
       );
     }); // Sort results alphanumerically
 
@@ -42,27 +42,29 @@ function BusAutoComplete() {
   const { handleKeyDown } = useHandleAutoCompleteKeys(
     resultsList,
     DebounceInput,
-    autoCompleteState
+    autoCompleteState,
   );
 
-  const handleInputChange = useCallback((e) => {
-    updateQuery(e.target.value);
-  }, [updateQuery]);
+  const handleInputChange = useCallback(
+    (e) => {
+      updateQuery(e.target.value);
+    },
+    [updateQuery],
+  );
 
-  const handleInputKeyDown = useCallback((e) => {
-    handleKeyDown(e);
-  }, [handleKeyDown]);
+  const handleInputKeyDown = useCallback(
+    (e) => {
+      handleKeyDown(e);
+    },
+    [handleKeyDown],
+  );
 
   function renderResults() {
     return (
       <ul className="wmnds-autocomplete-suggestions" ref={resultsList}>
         {resultsToShow.map(function renderResult(result) {
           return (
-            <BusAutoCompleteResult
-              key={result.id}
-              result={result}
-              handleKeyDown={handleKeyDown}
-            />
+            <BusAutoCompleteResult key={result.id} result={result} handleKeyDown={handleKeyDown} />
           );
         })}
       </ul>
