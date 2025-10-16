@@ -9,7 +9,7 @@ import Icon from '../shared/Icon/Icon';
 import s from './AutoComplete.module.scss';
 import SelectedService from './SelectedService/SelectedService';
 
-const AutoComplete = ({ loading }) => {
+function AutoComplete({ loading }) {
   const { removeSelectedItem, autoCompleteState, autoCompleteDispatch } = useResetState();
 
   const { selectedItems } = autoCompleteState;
@@ -22,7 +22,7 @@ const AutoComplete = ({ loading }) => {
 
   useEffect(() => {
     const isSameCompany = selectedItems.every(
-      (service) => service.operator.operatorName === selectedItems[0].operator.operatorName
+      (service) => service.operator.operatorName === selectedItems[0].operator.operatorName,
     );
 
     if (selectedItems.length) {
@@ -30,8 +30,8 @@ const AutoComplete = ({ loading }) => {
         setSingleCompany(true);
         setTicketURL(
           `https://find-a-ticket.wmnetwork.co.uk/?type=single&useOperator=${encodeURI(
-            selectedItems[0].operator.operatorName.replace(':', "'")
-          )}`
+            selectedItems[0].operator.operatorName.replace(':', "'"),
+          )}`,
         );
       } else {
         setSingleCompany(false);
@@ -53,69 +53,59 @@ const AutoComplete = ({ loading }) => {
           </div>
         </div>
       ) : (
-        <>
-          {autoCompleteState.selectedItems.length > 0 && (
-            <div className="wmnds-m-b-md">
-              <>
-                <div className="wmnds-m-b-md wmnds-p-b-xsm">
-                  {autoCompleteState.selectedItems.map((service) => (
-                    <SelectedService
-                      key={service.id}
-                      routeName={service.operator.routeName}
-                      operatorName={service.operator.operatorName.replace(':', "'")}
-                      serviceNumber={service.serviceNumber}
-                      onRemove={() => removeSelectedItem(service.id)}
-                    />
-                  ))}
+        autoCompleteState.selectedItems.length > 0 && (
+          <div className="wmnds-m-b-md">
+            <div className="wmnds-m-b-md wmnds-p-b-xsm">
+              {autoCompleteState.selectedItems.map((service) => (
+                <SelectedService
+                  key={service.id}
+                  routeName={service.operator.routeName}
+                  operatorName={service.operator.operatorName.replace(':', "'")}
+                  serviceNumber={service.serviceNumber}
+                  onRemove={() => removeSelectedItem(service.id)}
+                />
+              ))}
+            </div>
+            {autoCompleteState.ticketMode &&
+              (singleCompany ? (
+                <p>
+                  If you are only travelling on{' '}
+                  {selectedItems[0].operator.operatorName.replace(':', "'")} buses, you can buy
+                  tickets which only work with these buses.
+                </p>
+              ) : (
+                <p>
+                  If you are travelling with more than one bus company, you’ll need to buy an nBus
+                  ticket.
+                </p>
+              ))}
+            {!autoCompleteState.showAutocomplete && (
+              <div className="wmnds-grid wmnds-grid--spacing-md-2-lg">
+                <div className="wmnds-col-1-1 wmnds-col-md-1-2 wmnds-m-b-md">
+                  <Button
+                    text="Add another bus service"
+                    iconRight="general-expand"
+                    btnClass={`${s.leftAlignBtn} wmnds-btn--block wmnds-btn--primary`}
+                    onClick={showSearch}
+                  />
                 </div>
                 {autoCompleteState.ticketMode && (
-                  <>
-                    {singleCompany ? (
-                      <p>
-                        If you are only travelling on{' '}
-                        {selectedItems[0].operator.operatorName.replace(':', "'")} buses, you can
-                        buy tickets which only work with these buses.
-                      </p>
-                    ) : (
-                      <p>
-                        If you are travelling with more than one bus company, you’ll need to buy an
-                        nBus ticket.
-                      </p>
-                    )}
-                  </>
-                )}
-                {!autoCompleteState.showAutocomplete && (
-                  <div className="wmnds-grid wmnds-grid--spacing-md-2-lg">
-                    <div className="wmnds-col-1-1 wmnds-col-md-1-2 wmnds-m-b-md">
-                      <Button
-                        text="Add another bus service"
-                        iconRight="general-expand"
-                        btnClass={`${s.leftAlignBtn} wmnds-btn--block wmnds-btn--primary`}
-                        onClick={showSearch}
-                      />
-                    </div>
-                    {autoCompleteState.ticketMode && (
-                      <div className="wmnds-col-1-1 wmnds-col-md-1-2">
-                        <a
-                          href={ticketURL}
-                          className={`${s.leftAlignBtn} wmnds-btn wmnds-btn--block wmnds-btn__icon wmnds-btn__icon--right`}
-                        >
-                          {singleCompany
-                            ? `Select a ${selectedItems[0].operator.operatorName.replace(
-                                ':',
-                                "'"
-                              )} ticket`
-                            : 'Select an nBus ticket'}
-                          <Icon iconName="general-chevron-right" />
-                        </a>
-                      </div>
-                    )}
+                  <div className="wmnds-col-1-1 wmnds-col-md-1-2">
+                    <a
+                      href={ticketURL}
+                      className={`${s.leftAlignBtn} wmnds-btn wmnds-btn--block wmnds-btn__icon wmnds-btn__icon--right`}
+                    >
+                      {singleCompany
+                        ? `Select a ${selectedItems[0].operator.operatorName.replace(':', "'")} ticket`
+                        : 'Select an nBus ticket'}
+                      <Icon iconName="general-chevron-right" />
+                    </a>
                   </div>
                 )}
-              </>
-            </div>
-          )}
-        </>
+              </div>
+            )}
+          </div>
+        )
       )}
       {autoCompleteState.showAutocomplete && (
         <>
@@ -147,7 +137,7 @@ const AutoComplete = ({ loading }) => {
       )}
     </div>
   );
-};
+}
 
 AutoComplete.propTypes = {
   loading: PropTypes.bool,

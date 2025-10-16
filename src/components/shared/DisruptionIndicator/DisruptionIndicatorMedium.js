@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 
-const DisruptionIndicatorMedium = ({ className, iconLeft, narrow, text, title }) => {
+function DisruptionIndicatorMedium({ className, iconLeft, narrow, text, title }) {
   return (
     <div
       className={`
@@ -21,7 +21,7 @@ const DisruptionIndicatorMedium = ({ className, iconLeft, narrow, text, title })
       {text}
     </div>
   );
-};
+}
 
 // Set props
 DisruptionIndicatorMedium.propTypes = {

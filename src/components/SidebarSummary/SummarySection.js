@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import s from './SidebarSummary.module.scss';
 
-const SummarySection = ({ title, value }) => {
+function SummarySection({ title, value }) {
   return (
     <div className={s.summary}>
       <div className="wmnds-grid wmnds-grid--justify-between wmnds-m-b-xsm">
@@ -16,7 +16,7 @@ const SummarySection = ({ title, value }) => {
       <div>{value}</div>
     </div>
   );
-};
+}
 
 SummarySection.propTypes = {
   title: PropTypes.string.isRequired,

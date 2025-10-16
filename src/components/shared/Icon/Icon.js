@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 
 // Icons can be found at: https://designsystem.wmnetwork.co.uk/styles/icons/
 
-const Icon = ({ className, iconName }) => {
+function Icon({ className, iconName }) {
   return (
     <svg className={className}>
       <use xlinkHref={`#wmnds-${iconName}`} href={`#wmnds-${iconName}`} />
     </svg>
   );
-};
+}
 
 Icon.propTypes = {
   iconName: PropTypes.string.isRequired,

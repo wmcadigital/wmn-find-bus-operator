@@ -5,11 +5,11 @@ import DisruptionIndicatorMedium from 'components/shared/DisruptionIndicator/Dis
 // Import styles
 import s from './BusAutoCompleteResult.module.scss';
 
-const BusAutoCompleteResult = (props) => {
+function BusAutoCompleteResult(props) {
   const { result, handleKeyDown } = props || {};
   const [, autoCompleteDispatch] = useContext(AutoCompleteContext);
 
-  const updateSelectedService = () => {
+  function updateSelectedService() {
     autoCompleteDispatch({
       type: 'ADD_SELECTED_ITEM',
       payload: {
@@ -19,9 +19,17 @@ const BusAutoCompleteResult = (props) => {
       },
     });
     autoCompleteDispatch({ type: 'SHOW_AUTOCOMPLETE', payload: false });
-  };
+  }
 
-  // Return service with the above disruption logic, replace type and iconName with correc icon and class depending on disruption type
+  function handleClick() {
+    updateSelectedService();
+  }
+
+  function handleKeyDownWrapper(e) {
+    handleKeyDown(e);
+  }
+
+  // Return service with the above disruption logic, replace type and iconName with correct icon and class depending on disruption type
   return (
     <li
       className={`${s.noWrap} wmnds-autocomplete-suggestions__li wmnds-grid`}
@@ -30,8 +38,8 @@ const BusAutoCompleteResult = (props) => {
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
       role="button"
       aria-pressed="false"
-      onKeyDown={(e) => handleKeyDown(e)}
-      onClick={() => updateSelectedService()}
+      onKeyDown={handleKeyDownWrapper}
+      onClick={handleClick}
     >
       <div>
         <DisruptionIndicatorMedium
@@ -49,6 +57,6 @@ const BusAutoCompleteResult = (props) => {
       </div>
     </li>
   );
-};
+}
 
 export default BusAutoCompleteResult;

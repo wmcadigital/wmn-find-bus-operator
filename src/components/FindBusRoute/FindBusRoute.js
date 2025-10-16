@@ -6,8 +6,9 @@ import AutoComplete from '../AutoComplete/AutoComplete';
 import SidebarSummary from '../SidebarSummary/SidebarSummary';
 import s from './FindBusRoute.module.scss';
 
-const FindBusRoute = () => {
+function FindBusRoute() {
   const { loading, autoCompleteState } = useBusRoutesAPI();
+
   return (
     <div className="wmnds-container wmnds-p-b-lg wmnds-m-b-lg">
       {autoCompleteState.ticketMode ? (
@@ -50,6 +51,6 @@ const FindBusRoute = () => {
       </div>
     </div>
   );
-};
+}
 
 export default FindBusRoute;

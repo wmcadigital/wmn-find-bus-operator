@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import SummarySection from './SummarySection';
 
 // helpers
-const capitalize = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
-const arrayToSentence = (array) => {
+function capitalize(str) {
+  return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+}
+
+function arrayToSentence(array) {
   let sentence;
   if (array.length > 2) {
     sentence = `${array.slice(0, array.length - 1).join(', ')} and ${array.slice(-1)}`;
@@ -14,17 +17,19 @@ const arrayToSentence = (array) => {
     [sentence] = array;
   }
   return sentence;
-};
+}
 
-const SidebarSummary = ({ modes }) => {
-  const capitalizedModes = modes.map((m) => capitalize(m));
+function SidebarSummary({ modes }) {
+  const capitalizedModes = modes.map(function capitalizeMode(m) {
+    return capitalize(m);
+  });
 
   return (
     <div className="bg-white wmnds-p-md">
       <SummarySection title="Mode of travel" value={arrayToSentence(capitalizedModes)} />
     </div>
   );
-};
+}
 
 SidebarSummary.propTypes = {
   modes: PropTypes.arrayOf(PropTypes.string).isRequired,
