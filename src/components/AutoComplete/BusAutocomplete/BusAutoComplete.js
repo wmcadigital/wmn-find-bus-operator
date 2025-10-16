@@ -18,7 +18,7 @@ function BusAutoComplete() {
 
   const { loading, errorInfo, results, getAutoCompleteResults } = useAutoCompleteAPI(
     `/api/lineinfo?q=${encodeURI(autoCompleteState.query.toLowerCase())}`,
-    autoCompleteState.query.toLowerCase(),
+    autoCompleteState.query.toLowerCase()
   );
 
   const resultsToShow = results
@@ -34,7 +34,7 @@ function BusAutoComplete() {
         {
           numeric: true,
           ignorePunctuation: true,
-        },
+        }
       );
     }); // Sort results alphanumerically
 
@@ -42,21 +42,21 @@ function BusAutoComplete() {
   const { handleKeyDown } = useHandleAutoCompleteKeys(
     resultsList,
     DebounceInput,
-    autoCompleteState,
+    autoCompleteState
   );
 
   const handleInputChange = useCallback(
     (e) => {
       updateQuery(e.target.value);
     },
-    [updateQuery],
+    [updateQuery]
   );
 
   const handleInputKeyDown = useCallback(
     (e) => {
       handleKeyDown(e);
     },
-    [handleKeyDown],
+    [handleKeyDown]
   );
 
   function renderResults() {

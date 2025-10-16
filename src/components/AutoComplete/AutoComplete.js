@@ -22,7 +22,7 @@ function AutoComplete({ loading }) {
 
   useEffect(() => {
     const isSameCompany = selectedItems.every(
-      (service) => service.operator.operatorName === selectedItems[0].operator.operatorName,
+      (service) => service.operator.operatorName === selectedItems[0].operator.operatorName
     );
 
     if (selectedItems.length) {
@@ -30,8 +30,8 @@ function AutoComplete({ loading }) {
         setSingleCompany(true);
         setTicketURL(
           `https://find-a-ticket.wmnetwork.co.uk/?type=single&useOperator=${encodeURI(
-            selectedItems[0].operator.operatorName.replace(':', "'"),
-          )}`,
+            selectedItems[0].operator.operatorName.replace(':', "'")
+          )}`
         );
       } else {
         setSingleCompany(false);
@@ -97,7 +97,10 @@ function AutoComplete({ loading }) {
                       className={`${s.leftAlignBtn} wmnds-btn wmnds-btn--block wmnds-btn__icon wmnds-btn__icon--right`}
                     >
                       {singleCompany
-                        ? `Select a ${selectedItems[0].operator.operatorName.replace(':', "'")} ticket`
+                        ? `Select a ${selectedItems[0].operator.operatorName.replace(
+                          ':', 
+                          "'"
+                        )} ticket`
                         : 'Select an nBus ticket'}
                       <Icon iconName="general-chevron-right" />
                     </a>
