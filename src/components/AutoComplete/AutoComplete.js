@@ -98,7 +98,7 @@ function AutoComplete({ loading }) {
                     >
                       {singleCompany
                         ? `Select a ${selectedItems[0].operator.operatorName.replace(
-                            ':', 
+                            ':',
                             "'"
                           )} ticket`
                         : 'Select an nBus ticket'}
